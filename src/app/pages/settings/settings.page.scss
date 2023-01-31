@@ -1,0 +1,16 @@
+.header-container {
+  padding: 0 16px;
+}
+
+::ng-deep .ion-overlay-wrapper {
+  min-width: 85% !important;
+}
+
+.rowProfile {
+  text-align: -webkit-center;
+}
+
+ion-avatar {
+  height: 6rem;
+  width: 6rem;
+}

@@ -1,0 +1,19 @@
+ion-icon {
+    --color: var(--ion-color-secondary);
+    --color-activated: #fff;
+}
+
+ion-row {
+    text-align: -webkit-center;
+}
+
+.addPositionButton {
+    --border-radius: 5px !important;
+    height: 25px;
+    width: 15rem;
+    font-size: 14px;
+    --border-color: var(--ion-color-primary);
+    --color: var(--ion-color-secondary);
+    font-weight: 500 !important;
+    --color-activated: #fff;
+}

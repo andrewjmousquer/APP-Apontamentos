@@ -1,0 +1,25 @@
+ion-icon {
+    color: #2596be;
+}
+
+ion-toolbar {
+    border-radius: 0 0 0.5rem 0.5rem;
+    --border-color: black pink rgba(128, 128, 128, 0.479) red;
+    --border-width: 0px 0px 2px 0px !important;
+
+}
+
+ion-button {
+    --border-radius: 2px;
+    --background: #fff;
+    --background-activated: rgba(128, 128, 128, 0.479);
+    font-weight: 250;
+}
+
+.ion-padding-top {
+    padding-top: 40px;
+}
+
+.title {
+    font-weight: 600;
+}

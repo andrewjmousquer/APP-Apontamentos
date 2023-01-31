@@ -1,0 +1,20 @@
+.ion-label-subtitle {
+    font-size: smaller;
+}
+
+.ion-tooltip{
+    align-self: center;
+    font-size: 1.5rem;
+    float: right;
+    color: var(--ion-color-tooltip);
+}
+.custom-alert{
+    --width: 90%
+}
+
+.ion-modal-custom{
+    --width: 90%;
+    --height: 60%;
+    background: #0b0b0bbf;
+    --border-radius: 0.8rem;
+}

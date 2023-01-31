@@ -1,0 +1,23 @@
+<ion-row>
+    <ion-col size="12">
+        <ion-list>
+            <ion-item *ngFor="let file of images; let i = index">
+                <ion-thumbnail slot="start">
+                    <ion-img [src]="file.data"></ion-img>
+                </ion-thumbnail>
+                <ion-button slot="end" fill="clear" (click)="deleteImage(file)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-button>
+            </ion-item>
+            <ion-item lines="none" class="ion-align-self-center" *ngIf="images.length == 0 && imagesShow != null">
+                <ion-thumbnail slot="start">
+                    <ion-img [src]="imagesShow"></ion-img>
+                </ion-thumbnail>
+            </ion-item>
+        </ion-list>
+        <ion-button class="addPositionButton" expand="block" fill="outline" mode="ios" (click)="selectImage()">
+            <ion-icon class="ion-padding-end" name="cloud-upload-outline"></ion-icon>
+            <ion-label>Selecionar Documento</ion-label>
+        </ion-button>
+    </ion-col>
+</ion-row>

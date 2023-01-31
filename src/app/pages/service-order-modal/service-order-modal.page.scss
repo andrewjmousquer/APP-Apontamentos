@@ -1,0 +1,40 @@
+.ion-label-title {
+    color: black;
+    font-weight: bold;
+}
+
+.ion-label-subtitle {
+    font-size: smaller;
+}
+
+ion-radio {
+    height: 1em;
+    width: 1em;
+}
+
+.close-button{
+    --background:none;
+    --box-shadow:none;
+}
+
+ion-card{
+    background-color: #f0f0f0;
+}
+
+.checklist-buttom-ok{
+  --background: #7db495;
+  float: right;
+  margin: 0;
+}
+
+.checklist-buttom-nok{
+    --background: #4ba0df;
+    float: right;
+    margin: 0;
+  }
+
+  .non-compliance{
+    align-self: center;
+    font-size: 1.6rem;
+    float: right;
+}

@@ -1,0 +1,26 @@
+<ion-header class="header-menu">
+    <ion-toolbar>
+        <ion-grid fixed>
+            <ion-row>
+                <ion-col size="10" class="ion-align-self-center">
+                    <ion-label> Assinatura </ion-label>
+                </ion-col>
+                <ion-col size="2">
+                    <ion-button class="closeButton" (click)="closeModal()">
+                        <ion-icon name="close-sharp" color="dark" size="default"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+</ion-header>
+<ion-content>
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="12">
+                <app-finger-signature></app-finger-signature>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

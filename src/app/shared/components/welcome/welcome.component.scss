@@ -1,0 +1,32 @@
+.card-title {
+    box-shadow: none !important;
+    padding: 1.1rem;
+}
+
+ion-icon {
+    color: var(--ion-color-secondary);
+    padding-right: 0.3rem;
+}
+
+div,
+ion-label {
+    color: var(--ion-color-primary-text);
+    font-size: 1rem;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--ion-color-dark-tint)
+}
+
+.text-button {
+    font-size: 12px;
+    vertical-align: middle;
+    text-decoration: underline;
+}
+
+.label-termo-consentimento {
+    font-size: 12.3px;
+    margin-left: 15px;
+}

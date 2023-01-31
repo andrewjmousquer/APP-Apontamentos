@@ -1,0 +1,7 @@
+<ion-item (click)="openInput()">
+  <ion-label position="stacked">{{label}}</ion-label>
+  <ion-input name="dummyFacade" id="dummyFacade" #dummyFacade type="number" inputmode="numeric"
+             (keyup)="handleKeyUp($event)" (ionInput)="handleInput($event)"></ion-input>
+
+  <div class="display-value">{{ formattedAmount }}</div>
+</ion-item>

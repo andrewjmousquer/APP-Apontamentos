@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar class="ion-no-padding">
+    <ion-row class="ion-align-items-center">
+      <ion-button
+        class="default-color-element ion-no-margin"
+        (click)=" closeModal()">
+        <ion-icon
+          name="chevron-back-outline"
+          size="default"
+          color="medium"></ion-icon>
+      </ion-button>
+      <ion-title size="small"> Selecione as etapas</ion-title>
+    </ion-row>
+  </ion-toolbar>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+</ion-header>
+<ion-content>
+  <ion-card style="display: contents">
+    <ion-grid class="ion-text-center" fixed>
+      <ion-row>
+        <ion-col class="ion-no-padding" size="12">
+          <ion-label>Etapa</ion-label>
+          <ion-select placeholder="Selecione" [(ngModel)]="selectedMovement">
+            <ion-select-option
+              [value]="opt.id"
+              *ngFor="let opt of movementList">
+              {{opt.name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col class="ion-no-padding" size="12">
+          <ion-list>
+            <ion-item *ngFor="let entry of form">
+              <ion-label>{{entry.val.label}}</ion-label>
+              <ion-checkbox slot="end" [(ngModel)]="entry.isChecked" (ionChange)="addMovement(entry.val.id, $event.detail.checked)"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>
+<ion-button
+  class="ion-margin-top"
+  expand="block"
+  shape="round"
+  color="primary"
+  (click)="saveSpecialService()">Adicionar</ion-button>

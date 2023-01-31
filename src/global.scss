@@ -1,0 +1,104 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+:root {
+  --ion-tab-bar-background: #fbfbfb;
+  --ion-tab-bar-color: #2a474d;
+  --ion-tab-bar-color-selected: var(--ion-color-primary);
+  --ion-color-primary-text: #51585e;
+  --ion-color-tooltip: #1769aa;
+}
+
+body {
+  background-color: #fff;
+}
+
+.no-data-message {
+  padding: 16px;
+  text-align: center;
+  color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.6) !important;
+}
+
+.bid-barter-modal {
+  --backdrop-opacity: 0.8 !important;
+
+  .modal-wrapper {
+    --height: 90% !important;
+    --width: 90% !important;
+    --max-width: 480px;
+    --max-height: 640px;
+    border-radius: 5px;
+    position: absolute;
+  }
+}
+
+.mat-expansion-panel-body {
+  padding: 0 16px 16px !important;
+}
+
+.alert-tappable {
+  font-size: 13px;
+}
+
+.danger {
+  color: var(--ion-color-danger);
+  font-size: 12px;
+}
+
+ion-content.background {
+  --background: url(assets/background.png) 0 0/100% 100% no-repeat;
+}
+
+.logo-container {
+  text-align: right;
+
+  img {
+    height: 1.4rem;
+  }
+
+}
+
+.default-color-element{
+  --background:none;
+  --box-shadow:none;
+  color: var(--ion-color-medium, #92949c) !important;
+}
+
+.half-modal{
+  --max-height: 50vh;
+    background: rgb(0 0 0 / 83%);
+}
+
+.moviments-modal{
+  --max-height: 30vh;
+    background: rgb(0 0 0 / 48%);
+}
+
+.special-movement-modal{
+  --max-height: 45vh;
+    background: rgb(0 0 0 / 48%);
+}

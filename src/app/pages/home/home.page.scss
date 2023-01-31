@@ -1,0 +1,59 @@
+ion-icon {
+    color: #2596be;
+}
+
+ion-toolbar {
+    border-radius: 0 0 0.5rem 0.5rem;
+    --border-color: black pink rgba(128, 128, 128, 0.479) red;
+    --border-width: 0px 0px 0px 0px !important;
+}
+
+.homeButtons {
+    --border-radius: 20px !important;
+    font-weight: 400 !important;
+    width: 8.3rem !important;
+    height: 9.3rem;
+    --background: #fff;
+    color: var(--ion-color-primary-text);
+    display: inline-block !important;
+
+}
+
+.title {
+    font-size: 1.5rem;
+    color: var(--ion-tab-bar-color-selected);
+}
+
+.rowProfile {
+    text-align: -webkit-center;
+    height: 30%;
+    padding-top: 1.5rem;
+}
+
+.buttonIcon {
+    --border-radius: 2px !important;
+    --background: #fff !important;
+    --background-activated: rgba(128, 128, 128, 0.479) !important;
+    --box-shadow: none;
+    font-weight: 250 !important;
+}
+
+fa-icon {
+    font-size: 55px;
+    color: var(--ion-color-primary);
+}
+
+.cardMenu {
+    height: 70%;
+    display: flex;
+    align-items: center;
+    background: var(--ion-tab-bar-background);
+    margin: 0px;
+    border-radius: 70px 70px 0px 0px;
+    justify-content: center;
+}
+
+ion-avatar {
+    height: 6rem;
+    width: 6rem;
+}

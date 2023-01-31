@@ -1,0 +1,27 @@
+<div class="signature-pad">
+    <div>
+        <canvas class="signature-pad-canvas" #canvas style="touch-action: none;"></canvas>
+    </div>
+</div>
+<ion-toolbar color="primary" class="ion-justify-content-center">
+
+    <ion-buttons slot="start">
+        <ion-button color="light" expand="full" [disabled]="isCanvasBlank()" (click)="save()">
+            <fa-icon icon="floppy-disk"> </fa-icon>&nbsp;
+            Salvar
+        </ion-button>
+    </ion-buttons>
+    <ion-buttons class="ion-justify-content-center">
+        <ion-button class="ion-align-self-center" color="light" expand="full" (click)="undo()">
+            <fa-icon icon="rotate-left"></fa-icon>&nbsp;
+            Apagar
+        </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+
+        <ion-button color="light" expand="full" (click)="clear()">
+            <fa-icon icon="trash-can"></fa-icon>&nbsp;
+            Limpar
+        </ion-button>
+    </ion-buttons>
+</ion-toolbar>

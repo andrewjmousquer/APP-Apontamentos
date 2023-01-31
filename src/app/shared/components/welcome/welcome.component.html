@@ -1,0 +1,80 @@
+<ion-item class="ion-text-center ion-no-padding">
+    <ion-label class="title">Bem vindo!</ion-label>
+</ion-item>
+<ion-card class="ion-text-center card-title">
+    <div>
+        <ion-row>
+            <ion-label>A partir de agora você encontrará tudo o que precisa para concluir sua jornada.</ion-label>
+        </ion-row>
+        <br>
+        <ion-row>
+            <ion-label>Estes são os documentos que você precisará nos próximos passos: </ion-label>
+        </ion-row>
+
+        <ion-col class="ion-align-self-start">
+            <ion-row>
+                <ion-icon name="remove-circle"></ion-icon>
+                <ion-label>RG</ion-label>
+            </ion-row>
+            <ion-row class="ion-padding-top">
+                <ion-icon name="remove-circle"></ion-icon>
+                <ion-label>CNH</ion-label>
+            </ion-row>
+            <ion-row class="ion-padding-top">
+                <ion-icon name="remove-circle"></ion-icon>
+                <ion-label>PIS</ion-label>
+            </ion-row>
+            <ion-row class="ion-padding-top">
+                <ion-icon name="remove-circle"></ion-icon>
+                <ion-label>Título de Eleitor</ion-label>
+            </ion-row>
+            <ion-row class="ion-padding-top">
+                <ion-icon name="remove-circle"></ion-icon>
+                <ion-label>SUS</ion-label>
+            </ion-row>
+            <ion-row class="ion-padding-top">
+                <ion-icon name="remove-circle"></ion-icon>
+                <ion-label>CTPS</ion-label>
+            </ion-row>
+            <ion-row class="ion-padding-top">
+                <ion-icon name="remove-circle"></ion-icon>
+                <ion-label>Certidão de Nascimento</ion-label>
+            </ion-row>
+            <ion-row class="ion-padding-top">
+                <ion-icon name="remove-circle"></ion-icon>
+                <ion-label>Comprovante de Residência</ion-label>
+            </ion-row>
+        </ion-col>
+        <ion-item lines="none" class="ion-margin-top" [formGroup]="formAdd">
+            <div>
+                <ion-checkbox name="term" required="true" formControlName="checked"
+                    [checked]="formAdd.controls['checked'].value" (ionChange)="markCheckbox($event)">
+                </ion-checkbox>
+
+            </div>
+            <div class="label-termo-consentimento ">
+                <ion-row>
+                    <ion-text>
+                        Ao prosseguir, aceito ceder meus dados e concordo com o
+
+                        <ion-button size="small" fill="clear" mode="ios"
+                            class="text-button ion-no-padding ion-no-margin">
+                            Termo de
+                            Consentimento
+                        </ion-button>.
+                    </ion-text>
+                </ion-row>
+                <ion-text color="danger" class="danger ion-padding-top" *ngIf="!formAdd.controls['checked'].value"> É
+                    necessário
+                    aceitar o
+                    Termo de
+                    Consentimento
+                </ion-text>
+            </div>
+        </ion-item>
+        <ion-button expand="block" mode="ios" class="ion-margin-top" [disabled]="!formAdd.controls['checked'].value"
+            (click)="sendAccept()">
+            Próxima Etapa
+        </ion-button>
+    </div>
+</ion-card>

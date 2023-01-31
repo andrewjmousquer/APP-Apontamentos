@@ -1,0 +1,8 @@
+{
+  "name": "base-webportal-app",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

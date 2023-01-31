@@ -1,0 +1,47 @@
+<ion-header class="header-menu">
+    <ion-toolbar>
+        <ion-row class="ion-align-items-center">
+            <ion-col class="logo-col-centralizer">
+                <div class="logo-container">
+                    <img src="assets/logo.svg">
+                </div>
+            </ion-col>
+            <ion-col class="ion-text-end">
+                <ion-button>
+                    <ion-icon name="chatbox-ellipses-outline" size="large"></ion-icon>
+                </ion-button>
+            </ion-col>
+            <ion-col size="12" class="ion-align-self-center ion-text-center">
+                <ion-text>
+                    Exclusão de Cadastro
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+    <ion-progress-bar *ngIf="false" type="indeterminate"></ion-progress-bar>
+</ion-header>
+<ion-content>
+    <ion-row class="ion-align-items-center ion-padding-top">
+        <ion-col size="11" class="ion-align-self-center ion-text-center">
+            <ion-text style="font-size: 13px;">
+                Ao prosseguir com a excion-padding-horizontallusão de seu cadastro TODOS os seus dados serão deletados e
+                você não poderá recupera-los
+            </ion-text>
+        </ion-col>
+        <ion-col size="10" offset="1" class="ion-align-self-center ion-text-center ion-padding-top">
+            <ion-text style="font-size: 14px;">
+                <strong> Você deseja realmente excluir o seu cadastro ?</strong>
+            </ion-text>
+        </ion-col>
+        <ion-col size="10" offset="1" class="ion-align-self-center ion-text-center">
+            <ion-button [routerLink]="['/tabs/settings']" expand="block" color="danger">
+                Excluir cadastro
+            </ion-button>
+        </ion-col>
+        <ion-col size="10" offset="1" class="ion-align-self-center ion-text-center">
+            <ion-button fill="outline" [routerLink]="['/tabs/settings']" expand="block" color="primary">
+                Manter cadastro
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

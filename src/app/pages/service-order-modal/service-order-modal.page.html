@@ -1,0 +1,149 @@
+<ion-header>
+  <ion-toolbar class="ion-no-padding">
+    <ion-row class="ion-align-items-center">
+      <ion-button
+        class="default-color-element ion-no-margin"
+        (click)=" closeModal()">
+        <ion-icon
+          name="chevron-back-outline"
+          size="default"
+          color="medium"></ion-icon>
+      </ion-button>
+      <ion-col class="logo-container">
+        <img src="assets/logo.png" />
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-item class="ion-text-center" lines="none">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col>
+            <ion-card-title style="font-weight: bold; font-size: large">{{taskItem.stage.name}}
+              <ion-icon
+                class="non-compliance"
+                name="warning"
+                color="danger"
+                *ngIf="hasSpecialService"
+                (click)="openNonComplianceModal(taskItem.id)">
+              </ion-icon>
+            </ion-card-title>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-grid fixed class="ion-padding-top ion-padding-start">
+      <ion-row>
+        <ion-col size="12">
+          <ion-label class="ion-label-title">Nº da OS:</ion-label>
+          <span> {{taskItem.serviceOrder.number}}</span>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label class="ion-label-title">Marca: </ion-label>
+          <span>{{taskItem.serviceOrder.brand}}</span>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label class="ion-label-title">Modelo: </ion-label>
+          <span>{{taskItem.serviceOrder.model}}</span>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label class="ion-label-title">Placa: </ion-label>
+          <span>{{taskItem.serviceOrder.plate}}</span>
+        </ion-col>
+        <ion-col size="12">
+          <ion-label class="ion-label-title">Chassi: </ion-label>
+          <span>{{taskItem.serviceOrder.chassi}}</span>
+        </ion-col>
+        <ion-col
+          size="12"
+          *ngIf="taskItem.status.value == 'EM_ANDAMENTO' && canStart && hasChecklist">
+          <ion-label class="ion-label-title">Checklist: </ion-label>
+          <ion-button
+            [class]="checklistStatus ? 'checklist-buttom-nok' : 'checklist-buttom-ok'"
+            size="small"
+            shape="round"
+            (click)="openModal(taskItem.id)">Checklist</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card *ngIf="(listUsers.length > 0 && taskItem.status.value !== 'AGUARDANDO_INICIO')">
+    <ion-item class="ion-text-center ion-margin-bottom" lines="none">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col>
+            <ion-card-title style="font-weight: bold; font-size: large">Envolvidos </ion-card-title>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-grid fixed class="ion-padding-start" *ngFor="let users of listUsers">
+      <ion-row>
+        <ion-col size="12">
+          <ion-label class="ion-label-title">Nome:</ion-label>
+          <span> {{users.name}} - </span>
+          <span [style]="users.status.value == 'EM_ANDAMENTO' ? 'color: #008000;' : users.status.value == 'PAUSADO' ? 'color: #e0ac08;' : 'color: #d14040;'">{{users.status.label}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-text-center ion-padding-bottom" size="12">
+          <label class="ion-label-title">Tempo de Serviço: </label>
+          <span class="p-label-title">{{totalTaskTime}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card>
+    <ion-item
+      class="ion-text-center"
+      *ngIf="taskItem.status.value == 'EM_ANDAMENTO' && taskItem?.status.value == 'FINALIZADO'"
+      lines="none">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="warning-outline"></ion-icon>
+            <ion-card-subtitle>Aguardando finalização de outros usuarios ...</ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-card>
+</ion-content>
+<ion-row class="ion-no-margin">
+  <ion-col>
+    <ion-button
+      class="ion-margin-top"
+      expand="block"
+      shape="round"
+      *ngIf="taskUserItem?.status.value != 'EM_ANDAMENTO' && !canStart"
+      (click)="movimentTask('start')">Iniciar tarefa</ion-button>
+    <!-- <ion-button class=" ion-margin-top" expand="block" shape="round" color="danger"
+      *ngIf="taskUserItem?.status.value == 'EM_ANDAMENTO' || taskUserItem?.status.value == 'PAUSADO'">Não
+      conformidade</ion-button> -->
+    <!-- <ion-button
+      class="ion-margin-top"
+      expand="block"
+      shape="round"
+      color="light"
+      *ngIf="taskUserItem?.status.value == 'EM_ANDAMENTO'"
+      (click)="movimentTask('pause')">Pausar tarefa</ion-button>
+    <ion-button
+      class="ion-margin-top"
+      expand="block"
+      shape="round"
+      *ngIf="taskUserItem?.status.value == 'PAUSADO'"
+      (click)="movimentTask('resume')">Resumir tarefa</ion-button> -->
+    <ion-button
+      class="ion-margin-top"
+      expand="block"
+      shape="round"
+      color="dark"
+      *ngIf="(taskUserItem?.status.value == 'EM_ANDAMENTO' || taskUserItem?.status.value == 'PAUSADO')"
+      (click)="movimentTask('finish')">Encerrar tarefa</ion-button>
+  </ion-col>
+</ion-row>

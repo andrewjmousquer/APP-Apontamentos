@@ -1,0 +1,8 @@
+<ion-tabs>
+    <ion-tab-bar mode="md" slot="bottom" class="ion-padding-top">
+        <ion-tab-button *ngFor="let menu of listMenus" tab="{{menu.route}}">
+            <fa-icon style="font-size: 25px;" icon="{{menu.icon}}"></fa-icon>
+            <ion-label>{{menu.name}}</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

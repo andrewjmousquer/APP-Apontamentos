@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar class="ion-no-padding">
+        <ion-row class="ion-align-items-center">
+            <ion-button class="default-color-element ion-no-margin" (click)=" closeModal()">
+                <ion-icon name="chevron-back-outline" size="default" color="medium"></ion-icon>
+            </ion-button>
+        </ion-row>
+    </ion-toolbar>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+</ion-header>
+<ion-content>
+    <ion-card class="ion-no-margin ion-margin-top">
+        <ion-card-header>
+            <ion-card-subtitle class="ion-text-center" style="font-weight: 900px;">{{model.question.question}}
+            </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content class="ion-padding-start">
+            <form [formGroup]="modelComment" size="12">
+                <ion-item>
+                    <ion-textarea rows="8" cols="20" placeholder="Insira seu comentario..." formControlName="comment">
+                    </ion-textarea>
+                </ion-item>
+                <ion-button class="ion-no-margin checklist-buttom default-color-element" style="float: right;"
+                    (click)="sendComment()">
+                    <ion-icon name="send-outline"></ion-icon>
+                </ion-button>
+                <ion-button class="ion-no-margin checklist-buttom default-color-element" style="float: right;"
+                    (click)="takePicture(model)">
+                    <ion-icon name="camera-outline"></ion-icon>
+                </ion-button>
+            </form>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="ion-no-margin">
+        <ion-card-subtitle>{{model.fileName}}</ion-card-subtitle>
+    </ion-card>
+</ion-content>

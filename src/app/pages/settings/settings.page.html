@@ -1,0 +1,38 @@
+<ion-content>
+    <div style="text-align-last: center">
+        <img class="ion-padding-top" style=" height: 60px;" src="assets/logo.png">
+    </div>
+    <ion-grid class="ion-padding-top" style="padding-top: 2rem;">
+        <ion-row class="rowProfile">
+            <ion-col size="12">
+                <ion-avatar>
+                    <img [src]="srcUserImg" />
+                </ion-avatar>
+            </ion-col>
+            <ion-col size="12">
+                <h2 class="title">
+                    <b>{{nameUser}}</b>
+                </h2>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-item detail="false" *ngIf="customers != null">
+        <ion-label position="stacked">Cliente</ion-label>
+        <ion-select okText="Ok" cancelText="Cancelar" (ionChange)="changeCustomer($event)"
+            [(ngModel)]="selectedCustomer" required="true">
+            <ion-select-option *ngFor="let customer of customers" [value]="customer">
+                {{customer.label}}
+            </ion-select-option>
+        </ion-select>
+    </ion-item>
+    <!--     <ion-item>
+        <ion-label position="floating"> Versão {{versionNumber}} - {{versionDate}}</ion-label>
+    </ion-item> -->
+    <ion-row class="ion-align-items-center ion-justify-content-center ion-padding-top">
+        <ion-col size="6" class="ion-text-center">
+            <ion-button class="ion-margin-top" color="danger" expand="block" (click)="logout()">
+                Sair
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

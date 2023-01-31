@@ -1,0 +1,97 @@
+<ion-header>
+    <ion-toolbar class="ion-no-padding">
+        <ion-row class="ion-align-items-center">
+            <ion-button class="default-color-element ion-no-margin" (click)=" closeModal()">
+                <ion-icon name="chevron-back-outline" size="default" color="medium"></ion-icon>
+            </ion-button>
+            <ion-col class="logo-container">
+                <img src="assets/logo.png">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card class="ion-no-margin">
+        <ion-item class="ion-text-center" lines="none">
+            <ion-grid fixed>
+                <ion-row>
+                    <ion-col>
+                        <ion-card-title style="font-weight: bold; font-size: large;">{{checkList?.name}}
+                            <ion-icon class="ion-tooltip" name="information-circle" id="click-trigger"></ion-icon>
+                            <ion-popover trigger="click-trigger" triggerAction="click">
+                                <ng-template>
+                                    <ion-content class="ion-padding">{{checkList.descrition}}</ion-content>
+                                </ng-template>
+                            </ion-popover>
+                        </ion-card-title>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+        <ion-accordion-group multiple="true">
+            <ion-accordion *ngFor="let ckGroup of checkList?.groups; let groupIndex = index" value="{{groupIndex+1}}">
+                <ion-item style="align-content: space-between;" slot="header" color="light">
+                    <ion-label>{{ckGroup.name}}</ion-label>
+                    <ion-label class="ion-text-end">
+                        {{ckGroup.answered}}/{{ckGroup.questions.length}}
+                    </ion-label>
+                </ion-item>
+                <div class="ion-padding-top" slot="content"
+                    *ngFor="let ckQuestion of ckGroup.questions let questionIndex = index">
+                    <span class="ion-padding-start">{{ckQuestion.question}}</span>
+                    <ion-item lines="full" size="12">
+                        <ion-row>
+                            <ion-col size="12">
+                                <ion-list class="ion-no-padding">
+                                    <ion-radio-group [(ngModel)]="ckQuestion.answer?.answer.id"
+                                        (ngModelChange)="saveOnChange(ckQuestion.answer, ckQuestion)">
+                                        <ion-row>
+                                            <ion-item lines="none" *ngFor="let option of radioOptions">
+                                                <ion-radio slot="start" [value]="option.id"></ion-radio>
+                                                <ion-label class="ion-label-subtitle">{{option.value}}</ion-label>
+                                            </ion-item>
+                                        </ion-row>
+                                    </ion-radio-group>
+                                </ion-list>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-row class="ion-align-items-center" style="place-content: center;">
+                                    <ion-button id="open-modal" class="default-color-element"
+                                        (click)="openCommentModal(ckQuestion.answer)"
+                                        *ngIf="ckQuestion.answer.answer.id !== undefined">
+                                        <ion-icon name="create" size="large"></ion-icon>
+                                    </ion-button>
+                                </ion-row>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-row class="ion-align-items-center" style="place-content: center;">
+                                    <ion-button class="default-color-element" (click)="takePicture(ckQuestion.answer)"
+                                        *ngIf="ckQuestion.answer.answer.id !== undefined">
+                                        <ion-icon name="camera" size="large"></ion-icon>
+                                    </ion-button>
+                                </ion-row>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-row class="ion-align-items-center" style="place-content: center;">
+                                    <ion-button class="default-color-element" (click)="openModalCommentView(ckQuestion)"
+                                        *ngIf="ckQuestion.answer.answer.id !== undefined">
+                                        <ion-icon name="chatbox-ellipses" size="large" [style]="ckQuestion.answer.comment != null &&
+                                            ckQuestion.answer.comment
+                                            !== '' ? 'color: #17aa8f;' : 'color: #bfbbbb;'"></ion-icon>
+                                    </ion-button>
+                                </ion-row>
+                            </ion-col>
+                        </ion-row>
+                    </ion-item>
+                </div>
+            </ion-accordion>
+        </ion-accordion-group>
+    </ion-card>
+</ion-content>
+<ion-row class="ion-no-margin">
+    <ion-col>
+        <ion-button expand="full" shape="round" (click)="saveAndFinish()" [disabled]="enableSaveAndFinish()">Salvar e
+            Finalizar
+        </ion-button>
+    </ion-col>
+</ion-row>

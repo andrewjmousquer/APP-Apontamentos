@@ -1,0 +1,77 @@
+<ion-header>
+    <ion-toolbar class="ion-no-padding">
+        <ion-row class="ion-align-items-center">
+            <ion-button class="default-color-element ion-no-margin" (click)=" closeModal()">
+                <ion-icon name="chevron-back-outline" size="default" color="medium"></ion-icon>
+            </ion-button>
+            <ion-col class="logo-container">
+                <img src="assets/logo.png">
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+</ion-header>
+<ion-content>
+    <ion-segment (ionChange)="segmentChanged($event)" value="comments">
+        <ion-segment-button value="comments" checked>
+            <ion-icon name="chatbox-ellipses"></ion-icon>
+            <ion-label>Comentarios</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="photos">
+            <ion-icon name="camera"></ion-icon>
+            <ion-label>Fotos</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    <ion-list *ngIf="segment === 'comments'">
+        <ion-card class="ion-no-margin card-photos">
+            <ion-item class="ion-text-center" lines="none">
+                <ion-grid fixed>
+                    <ion-row>
+                        <ion-col>
+                            <ion-card-subtitle style="font-weight: bold; font-size: large;">
+                                {{answer?.question.question}}
+                            </ion-card-subtitle>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+            <ion-card-content class="ion-no-padding">
+                <ion-grid fixed>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item class="radius-comment" lines="none">
+                                {{answer?.comment}}
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
+    <ion-list *ngIf="segment === 'photos'">
+        <ion-card class="ion-no-margin card-photos">
+            <ion-item class="ion-text-center" lines="none">
+                <ion-grid fixed>
+                    <ion-row>
+                        <ion-col>
+                            <ion-card-subtitle style="font-weight: bold; font-size: large;">
+                                {{answer?.question.question}}
+                            </ion-card-subtitle>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+            <ion-card class="ion-text-center" *ngFor="let photos of answer.photos; let i = index">
+                <ion-card-content class="ion-no-padding">
+                    <ion-grid fixed>
+                        <ion-row>
+                            <ion-col>
+                                <ion-img [src]="photos.url"></ion-img>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+        </ion-card>
+    </ion-list>
+</ion-content>

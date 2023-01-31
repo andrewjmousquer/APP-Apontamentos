@@ -1,0 +1,659 @@
+<div id="basic-data">
+    <ion-item class="ion-text-center ion-no-padding">
+        <ion-label class="title">Dados Básicos</ion-label>
+    </ion-item>
+    <div [formGroup]="formBasic">
+        <mat-stepper orientation="vertical">
+            <mat-step>
+                <ng-template matStepLabel class="labelBasic">Pessoal</ng-template>
+                <ng-template matStepContent>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Nome Completo
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input type="text" required="true" maxlength="150" formControlName="name">
+                                </ion-input>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['name'].invalid && (formBasic.controls['name'].dirty || formBasic.controls['name'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['name'].errors?.required" class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Nome Social
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input type="text" required="true" maxlength="150" formControlName="socialName">
+                                </ion-input>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['socialName'].invalid && (formBasic.controls['socialName'].dirty || formBasic.controls['socialName'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['socialName'].errors?.required" class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="stacked">
+                                    CPF
+                                </ion-label>
+                                <label class="ion-padding-top" position="stacked">
+                                    {{formBasic.controls['cpf'].value}}
+                                </label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Naturalidade - Estado
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-select placeholder="Estado" class="text-style"
+                                    formControlName="placeOfBirthCityState"
+                                    (ngModelChange)="getCities($event.target.value, true)">
+                                    <ion-select-option [value]="state.name" *ngFor="let state of stateOfBirth">
+                                        {{state.name}}
+                                    </ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['placeOfBirthCityState'].invalid && (formBasic.controls['placeOfBirthCityState'].dirty || formBasic.controls['placeOfBirthCityState'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['placeOfBirthCityState'].errors?.required"
+                                    class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Naturalidade - Cidade
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-select placeholder="Cidade" class="text-style"
+                                    formControlName="placeOfBirthCuntry">
+                                    <ion-select-option [value]="city.name" *ngFor="let city of cityOfBirth">
+                                        {{city.name}}
+                                    </ion-select-option>
+
+                                </ion-select>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['placeOfBirthCuntry'].invalid && (formBasic.controls['placeOfBirthCuntry'].dirty || formBasic.controls['placeOfBirthCuntry'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['placeOfBirthCuntry'].errors?.required" class="danger">
+                                    Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Data de Nascimento
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input class="text-style ion-margin-top" type="date" required="true"
+                                    formControlName="bithDay">
+                                </ion-input>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['bithDay'].invalid && (formBasic.controls['bithDay'].dirty || formBasic.controls['bithDay'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['bithDay'].errors?.required" class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Gênero
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-select placeholder="Selecione o gênero" formControlName="gender">
+                                    <ion-select-option *ngFor="let gender of genderList" [value]="gender.id">
+                                        {{gender.value}}
+                                    </ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['gender'].invalid && (formBasic.controls['gender'].dirty || formBasic.controls['gender'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['gender'].errors?.required" class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Raça/Cor
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-select placeholder="Selecione a Raça/Cor" formControlName="raceColor">
+                                    <ion-select-option *ngFor="let race of raceColorList" [value]="race.id">
+                                        {{race.value}}
+                                    </ion-select-option>
+                                </ion-select>
+                                <div *ngIf="formBasic.controls['raceColor'].invalid && (formBasic.controls['raceColor'].dirty || formBasic.controls['raceColor'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="formBasic.controls['raceColor'].errors?.required" class="danger">Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Nome do Pai
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input type="text" required="true" maxlength="150" formControlName="fatherName">
+                                </ion-input>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['fatherName'].invalid && (formBasic.controls['fatherName'].dirty || formBasic.controls['fatherName'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['fatherName'].errors?.required" class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Nome da Mãe
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input type="text" required="true" maxlength="150" formControlName="motherName">
+                                </ion-input>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['motherName'].invalid && (formBasic.controls['motherName'].dirty || formBasic.controls['motherName'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['motherName'].errors?.required" class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Estado Civil
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-select placeholder="Selecione o Estado Civil" formControlName="maritalStatus">
+                                    <ion-select-option *ngFor="let marital of maritalStatusList" [value]="marital.id">
+                                        {{marital.value}}
+                                    </ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['maritalStatus'].invalid && (formBasic.controls['maritalStatus'].dirty || formBasic.controls['maritalStatus'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['maritalStatus'].errors?.required" class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Possui deficiência?
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-select placeholder="Selecione
+                                " formControlName="deficiency">
+                                    <ion-select-option *ngFor="let deficiency of deficiencyList"
+                                        [value]="deficiency.id">
+                                        {{deficiency.value}}
+                                    </ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['deficiency'].invalid && (formBasic.controls['deficiency'].dirty || formBasic.controls['deficiency'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['deficiency'].errors?.required" class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ng-template>
+            </mat-step>
+            <mat-step formGroupName="address">
+                <ng-template matStepLabel>Endereço</ng-template>
+                <ng-template matStepContent>
+                    <ion-row>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    CEP
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input type="text" required="true" maxlength="10" formControlName="zipCode"
+                                    [wbpCepDirective] appIntegerInput (ionBlur)="getCep()">
+                                </ion-input>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['address'].controls['zipCode'].invalid && (formBasic.controls['address'].controls['zipCode'].dirty || formBasic.controls['address'].controls['zipCode'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['address'].controls['zipCode'].errors?.required"
+                                    class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Rua
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input type="text" required="true" maxlength="150" formControlName="street">
+                                </ion-input>
+                            </ion-item>
+                            <div *ngIf="formBasic.controls['address'].controls['street'].invalid && (formBasic.controls['address'].controls['street'].dirty || formBasic.controls['address'].controls['street'].touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="formBasic.controls['address'].controls['street'].errors?.required"
+                                    class="danger">Dado
+                                    obrigatório </div>
+                            </div>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Número
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input type="text" required="true" formControlName="number">
+                                </ion-input>
+                                <div *ngIf="formBasic.controls['address'].controls['number'].invalid && (formBasic.controls['address'].controls['number'].dirty || formBasic.controls['address'].controls['address'].controls['number'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="formBasic.controls['address'].controls['number'].errors?.required"
+                                        class="danger">Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Bairro
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-input type="text" required="true" maxlength="150" formControlName="district">
+                                </ion-input>
+                                <div *ngIf="formBasic.controls['address'].controls['district'].invalid && (formBasic.controls['address'].controls['district'].dirty || formBasic.controls['address'].controls['district'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="formBasic.controls['address'].controls['district'].errors?.required"
+                                        class="danger">Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Estado
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-select placeholder="State" class="text-style" formControlName="state"
+                                    (ionChange)="getCities($event.target.value, false)" [compareWith]="compareFn">
+                                    <ion-select-option [value]="state" *ngFor="let state of stateList">{{state.name}}
+                                    </ion-select-option>
+                                </ion-select>
+                                <div *ngIf="formBasic.controls['address'].controls['state'].invalid && (formBasic.controls['address'].controls['state'].dirty || formBasic.controls['address'].controls['state'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="formBasic.controls['address'].controls['state'].errors?.required"
+                                        class="danger">Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col size="12">
+                            <ion-item mode="md">
+                                <ion-label position="floating">
+                                    Cidade
+                                    <ion-text color="danger">*</ion-text>
+                                </ion-label>
+                                <ion-select placeholder="Cidade" class="text-style" formControlName="city"
+                                    [compareWith]="compareFn">
+                                    <ion-select-option [value]="city" *ngFor="let city of cityList">{{city.name}}
+                                    </ion-select-option>
+
+                                </ion-select>
+                                <div *ngIf="formBasic.controls['address'].controls['city'].invalid && (formBasic.controls['address'].controls['city'].dirty || formBasic.controls['address'].controls['city'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="formBasic.controls['address'].controls['city'].errors?.required"
+                                        class="danger">Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ng-template>
+            </mat-step>
+            <mat-step formArrayName="contacts">
+                <ng-template matStepLabel>Contato</ng-template>
+                <form>
+                    <div *ngFor="let contact of getContactList.controls; let i = index">
+                        <ion-row class="ion-marging-top row-title ion-padding-top">- Contato {{i+1}}
+                            <ion-button class="delPositionButton ion-justify-content-between" expand="block"
+                                fill="outline" mode="ios" (click)="delContact(i, contact.get('id').value)"
+                                *ngIf="getContactList.length>1">
+                                <ion-icon name="trash-outline" color="danger"></ion-icon>
+                            </ion-button>
+                        </ion-row>
+                        <ion-row [formGroup]="contact">
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Tipo de Contato
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-select placeholder="Selecione" class="text-style" formControlName="type"
+                                        [compareWith]="compareFn">
+                                        <ion-select-option class="ion-text-capitalize" [value]="contact"
+                                            *ngFor="let contact of contactList">
+                                            {{contact.value | titlecase}}
+                                        </ion-select-option>
+                                    </ion-select>
+                                    <div *ngIf="contact.controls['type'].invalid && (contact.controls['type'].dirty || contact.controls['type'].touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="contact.controls['type'].errors?.required" class="danger">Dado
+                                            obrigatório </div>
+                                    </div>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Contato:
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150" formControlName="value"
+                                        mask="(**) ****-****">
+                                    </ion-input>
+                                </ion-item>
+                                <div *ngIf="contact.controls['value'].invalid && (contact.controls['value'].dirty || contact.controls['value'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="contact.controls['value'].errors?.required" class="danger">Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                    <div class="ion-margin-top saveDiv">
+                        <ion-button class="addPositionButton" expand="block" fill="outline" mode="ios"
+                            (click)="addContact(null)">
+                            <ion-icon name="add-outline" color="primary"></ion-icon>
+                        </ion-button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step formArrayName="emergencyContactList">
+                <ng-template matStepLabel>Contato Emergencial</ng-template>
+                <form>
+                    <div *ngFor="let emergency of getEmergencyContact.controls; let i = index">
+                        <ion-row class="ion-marging-top row-title ion-padding-top">- Contato {{i+1}}
+                            <ion-button class="delPositionButton ion-justify-content-between" expand="block"
+                                fill="outline" mode="ios" (click)="delEmergencyContact(i, emergency.get('id').value)"
+                                *ngIf="getEmergencyContact.length>1">
+                                <ion-icon name="trash-outline" color="danger"></ion-icon>
+                            </ion-button>
+                        </ion-row>
+                        <ion-row [formGroup]="emergency">
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Nome:
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150" formControlName="name">
+                                    </ion-input>
+                                </ion-item>
+                                <div *ngIf="emergency.controls['name'].invalid && (emergency.controls['name'].dirty || emergency.controls['name'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="emergency.controls['name'].errors?.required" class="danger">Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Grau de parentesco:
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150" formControlName="kinship">
+                                    </ion-input>
+                                </ion-item>
+                                <div *ngIf="emergency.controls['kinship'].invalid && (emergency.controls['kinship'].dirty || emergency.controls['kinship'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="emergency.controls['kinship'].errors?.required" class="danger">Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Contato:
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150"
+                                        formControlName="phoneNumber">
+                                    </ion-input>
+                                </ion-item>
+                                <div *ngIf="emergency.controls['phoneNumber'].invalid && (emergency.controls['phoneNumber'].dirty || emergency.controls['phoneNumber'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="emergency.controls['phoneNumber'].errors?.required" class="danger">
+                                        Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                    <div class="ion-margin-top saveDiv">
+                        <ion-button class="addPositionButton" expand="block" fill="outline" mode="ios"
+                            (click)="addEmergencyContact(null)">
+                            <ion-icon name="add-outline" color="primary"></ion-icon>
+                        </ion-button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step formArrayName="bankAccount">
+                <ng-template matStepLabel>Dados Bancários</ng-template>
+                <form>
+                    <div *ngFor="let account of getBankAccountList.controls; let i = index">
+                        <ion-row class="ion-marging-top row-title ion-padding-top">- Conta Bancária {{i+1}}
+                            <ion-button class="delPositionButton ion-justify-content-between" expand="block"
+                                fill="outline" mode="ios" (click)="delBankAccount(i, account.get('id').value)"
+                                *ngIf="getBankAccountList.length>1">
+                                <ion-icon name="trash-outline" color="danger"></ion-icon>
+                            </ion-button>
+                        </ion-row>
+                        <ion-row [formGroup]="account">
+                            <ion-col size="12">
+                                <ion-item mode="md" lines="none">
+                                    <ion-checkbox name="term" required="true" formControlName="mainAccount"
+                                        [checked]="account.controls['mainAccount'].value"
+                                        (mouseup)="markCheckbox(!account.controls['mainAccount'].value, i)"
+                                        (ionChange)="validateMainAccount()">
+                                    </ion-checkbox>
+                                    <ion-label class="ion-padding-start">
+                                        Conta Principal
+                                    </ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Banco
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150" formControlName="bank">
+                                    </ion-input>
+                                    <div *ngIf="account.controls['bank'].invalid && (account.controls['bank'].dirty || account.controls['bank'].touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="account.controls['bank'].errors?.required" class="danger">
+                                            Dado
+                                            obrigatório </div>
+                                    </div>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Agência
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150" formControlName="agency">
+                                    </ion-input>
+                                </ion-item>
+                                <div *ngIf="account.controls['agency'].invalid && (account.controls['agency'].dirty || account.controls['agency'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="account.controls['agency'].errors?.required" class="danger">
+                                        Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Conta
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150"
+                                        formControlName="accountNumber">
+                                    </ion-input>
+                                    <div *ngIf="account.controls['accountNumber'].invalid && (account.controls['accountNumber'].dirty || account.controls['accountNumber'].touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="account.controls['accountNumber'].errors?.required" class="danger">
+                                            Dado
+                                            obrigatório </div>
+                                    </div>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Tipo
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-select placeholder="Selecione" class="text-style" formControlName="type">
+                                        <ion-select-option class="ion-text-capitalize" [value]="bank.id"
+                                            *ngFor="let bank of bankAccountList">
+                                            {{bank.value | titlecase}}
+                                        </ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <div *ngIf="account.controls['type'].invalid && (account.controls['type'].dirty || account.controls['type'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="account.controls['type'].errors?.required" class="danger">
+                                        Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                    <div class="ion-margin-top saveDiv">
+                        <ion-button class="addPositionButton" expand="block" fill="outline" mode="ios"
+                            (click)="addBankAccount(null)">
+                            <ion-icon name="add-outline" color="primary"></ion-icon>
+                        </ion-button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step formArrayName="schoolingList">
+                <ng-template matStepLabel>Formação</ng-template>
+                <form>
+                    <div *ngFor="let schooling of getSchoolingList.controls; let i = index">
+                        <ion-row class="ion-marging-top row-title ion-padding-top">- Formação {{i+1}}
+                            <ion-button class="delPositionButton ion-justify-content-between" expand="block"
+                                fill="outline" mode="ios" (click)="delSchoolingList(i, schooling.get('id').value)"
+                                *ngIf="getSchoolingList.length>1">
+                                <ion-icon name="trash-outline" color="danger"></ion-icon>
+                            </ion-button>
+                        </ion-row>
+                        <ion-row [formGroup]="schooling">
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Curso
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150" formControlName="course">
+                                    </ion-input>
+                                    <div *ngIf="schooling.controls['course'].invalid && (schooling.controls['course'].dirty || schooling.controls['course'].touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="schooling.controls['course'].errors?.required" class="danger">
+                                            Dado
+                                            obrigatório </div>
+                                    </div>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Instituição
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-input type="text" required="true" maxlength="150"
+                                        formControlName="institution">
+                                    </ion-input>
+                                </ion-item>
+                                <div *ngIf="schooling.controls['institution'].invalid && (schooling.controls['institution'].dirty || schooling.controls['institution'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="schooling.controls['institution'].errors?.required" class="danger">
+                                        Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        Tipo de Curso
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-select placeholder="Selecione" class="text-style" formControlName="type">
+                                        <ion-select-option class="ion-text-capitalize" [value]="level.id"
+                                            *ngFor="let level of schoolingLevelList">
+                                            {{level.value | titlecase}}
+                                        </ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <div *ngIf="schooling.controls['course'].invalid && (schooling.controls['course'].dirty || schooling.controls['course'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="schooling.controls['course'].errors?.required" class="danger">
+                                        Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                            <ion-col size="12">
+                                <ion-item mode="md">
+                                    <ion-label position="floating">
+                                        situação
+                                        <ion-text color="danger">*</ion-text>
+                                    </ion-label>
+                                    <ion-select placeholder="Selecione" class="text-style" formControlName="status">
+                                        <ion-select-option class="ion-text-capitalize" [value]="status.id"
+                                            *ngFor="let status of schoolingStatusList">
+                                            {{status.value | titlecase}}
+                                        </ion-select-option>
+                                    </ion-select>
+                                </ion-item>
+                                <div *ngIf="schooling.controls['course'].invalid && (schooling.controls['course'].dirty || schooling.controls['course'].touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="schooling.controls['course'].errors?.required" class="danger">
+                                        Dado
+                                        obrigatório </div>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                    <div class="ion-margin-top saveDiv">
+                        <ion-button class="addPositionButton" expand="block" fill="outline" mode="ios"
+                            (click)="addSchoolingList(null)">
+                            <ion-icon name="add-outline" color="primary"></ion-icon>
+                        </ion-button>
+                    </div>
+                </form>
+            </mat-step>
+        </mat-stepper>
+        <div class="ion-margin-top saveDiv">
+            <ion-button class="saveButton" expand="block" mode="ios" (click)="save()">
+                Salvar
+            </ion-button>
+        </div>
+    </div>
+</div>
